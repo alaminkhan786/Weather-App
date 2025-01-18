@@ -13,10 +13,24 @@ function weather_app(city){
         console.log(data);
         cityName.innerHTML = data.name;
         cityTemp.innerHTML = Math.floor(data.main.temp - 273.15);
-        tempDescription.innerHTML = data.weather[0].main;
+        tempDescription.innerHTML = data.weather[0].description;
+
+        //set weather-icon
+        const url = `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
+        const imgIcon = document.getElementById('weather-icon');
+        imgIcon.setAttribute('src', url);
+
+        
     })
 }
 
 search.addEventListener('click', () => {
-    weather_app(document.getElementById('cityNameInput').value);
+    const cityNameInput = document.getElementById('cityNameInput').value;
+    if (cityNameInput !== '') {
+        weather_app(cityNameInput);
+    }
+    else{
+        alert('Please enter a city name');
+    }
 });
+
